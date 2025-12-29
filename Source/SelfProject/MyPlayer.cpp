@@ -2,6 +2,8 @@
 
 
 #include "MyPlayer.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 AMyPlayer::AMyPlayer()
@@ -9,6 +11,19 @@ AMyPlayer::AMyPlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple.SKM_Quinn_Simple"));
+
+	if (SM.Succeeded())
+	{
+		GetMesh()->SetSkeletalMesh(SM.Object);
+		GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -90.0f), FRotator(0.0f, -90.0f, 0.0f));
+	}
+
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+
+	FollowCamera->SetupAttachment(CameraBoom);
+	FollowCamera->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, 150.0f), FRotator(-20.0f, 0.0f, 0.0f));
 }
 
 // Called when the game starts or when spawned

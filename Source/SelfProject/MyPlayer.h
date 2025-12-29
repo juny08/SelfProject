@@ -10,6 +10,11 @@ UCLASS()
 class SELFPROJECT_API AMyPlayer : public ACharacter
 {
 	GENERATED_BODY()
+public:
+	UPROPERTY(VisibleAnywhere)
+	class USpringArmComponent* CameraBoom;
+	UPROPERTY(VisibleAnywhere)
+	class UCameraComponent* FollowCamera;
 
 public:
 	// Sets default values for this character's properties
