@@ -4,17 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "MyPlayer.generated.h"
 
 UCLASS()
 class SELFPROJECT_API AMyPlayer : public ACharacter
 {
 	GENERATED_BODY()
-public:
+private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* CameraBoom;
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
+	class UInputMappingContext* DefaultMappingContext;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
+	class UInputAction* MoveAction;
 
 public:
 	// Sets default values for this character's properties
@@ -30,5 +36,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+public:
+	void KeyUpDown(float Value);
+	void KeyLeftRight(float Value);
+	void Move(const FInputActionValue& Value);
 };
