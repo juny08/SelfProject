@@ -13,7 +13,7 @@ AMyPlayer::AMyPlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple.SKM_Quinn_Simple"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("/Game/ThirdPersons/Characters/Mannequins/Meshes/SKM_Quinn_Simple.SKM_Quinn_Simple"));
 
 	if (SM.Succeeded())
 	{
