@@ -17,11 +17,6 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* FollowCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
-	class UInputMappingContext* DefaultMappingContext;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
-	class UInputAction* MoveAction;
-
 public:
 	// Sets default values for this character's properties
 	AMyPlayer();
@@ -36,8 +31,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-public:
-	void KeyUpDown(float Value);
-	void KeyLeftRight(float Value);
-	void Move(const FInputActionValue& Value);
 };
