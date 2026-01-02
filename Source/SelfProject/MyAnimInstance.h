@@ -17,6 +17,10 @@ class SELFPROJECT_API UMyAnimInstance : public UAnimInstance
 private:
 	UPROPERTY(Category = "Ani", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	bool ShouldMove;
+	UPROPERTY(Category = "Ani", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	float Horizontal;
+	UPROPERTY(Category = "Ani", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	float Vertical;
 public:
 	UPROPERTY(VisibleAnywhere)
 	class AMyPlayer* MyPlayer;

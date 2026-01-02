@@ -28,6 +28,12 @@ AMyPlayer::AMyPlayer()
 	CameraBoom->SetupAttachment(RootComponent);
 	FollowCamera->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, 150.0f), FRotator(-20.0f, 0.0f, 0.0f));
 	CameraBoom->TargetArmLength = 400.f;
+
+	static ConstructorHelpers::FClassFinder<UAnimInstance>AI(TEXT("/Script/Engine.AnimBlueprint'/Game/My/Anim/ABP_MyPlayer.ABP_MyPlayer_C'"));
+	if (AI.Succeeded())
+	{
+		GetMesh()->SetAnimClass(AI.Class);
+	}
 }
 
 // Called when the game starts or when spawned
