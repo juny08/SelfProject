@@ -16,6 +16,8 @@ private:
 	class USpringArmComponent* CameraBoom;
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* FollowCamera;
+	UPROPERTY(VisibleAnywhere)
+	class UAnimInstance* AnimInstance;
 
 public:
 	// Sets default values for this character's properties
