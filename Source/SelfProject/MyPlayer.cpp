@@ -54,5 +54,50 @@ void AMyPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+void AMyPlayer::Attack()
+{
+	FHitResult HitResult;
+	FCollisionQueryParams Parms(NAME_None, false, this);
+
+	float AttackRange = 200.f;
+	float AttackRadius = 40.f;
+	float AttackHalfHeight = 90.f;
+
+	FVector StartPos = GetActorLocation();
+	FVector EndPos = GetActorLocation() + GetActorForwardVector() * AttackRange;
+
+	bool Result = GetWorld()->SweepSingleByChannel
+	(
+		OUT HitResult, 
+		StartPos,
+		EndPos,
+		FQuat::Identity,
+		ECollisionChannel::ECC_GameTraceChannel1,
+		FCollisionShape::MakeCapsule(AttackRadius, AttackHalfHeight),
+		Parms
+	);
+
+	FQuat AttackRotation = FRotationMatrix::MakeFromZ(EndPos).ToQuat();
+	FColor AttackColor = Result ? FColor::Green : FColor::Red;
+	
+	DrawDebugCapsule
+	(
+		GetWorld(),
+		StartPos,
+		AttackHalfHeight,
+		AttackRadius,
+		AttackRotation,
+		AttackColor,
+		false,
+		2.0f
+	);
+
+
+	if (Result && HitResult.GetActor())
+	{
+		UE_LOG(LogTemp, Log, TEXT("Hit : %s"), *HitResult.GetActor()->GetName())
+	}
+}
+
 
 

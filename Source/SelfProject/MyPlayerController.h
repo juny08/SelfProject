@@ -19,8 +19,15 @@ private:
 	class UInputMappingContext* DefaultMappingContext;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
 	class UInputAction* MoveAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
+	class UInputAction* JumpAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = true))
+	class UInputAction* AttackAction;
 public:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	void Move(const FInputActionValue& Value);
+	void OnAttack();
+	void Jump();
+	void StopJumping();
 };
