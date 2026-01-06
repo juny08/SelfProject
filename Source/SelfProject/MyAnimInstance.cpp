@@ -4,6 +4,16 @@
 #include "MyAnimInstance.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+UMyAnimInstance::UMyAnimInstance()
+{
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> AM(TEXT("/Game/Variant_Combat/Anims/AM_ComboAttack.AM_ComboAttack"));
+
+	if (AM.Succeeded())
+	{
+		AttackMontage = AM.Object;
+	}
+}
+
 void UMyAnimInstance::NativeBeginPlay()
 {
 	Super::NativeBeginPlay();
@@ -27,7 +37,7 @@ void UMyAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	if (IsValid(CharacterMovement))
 	{
-		FVector Velocity = CharacterMovement->Velocity;
+		Velocity = CharacterMovement->Velocity;
 		float GroundSpeed = Velocity.Size2D();
 
 		FRotator Rotation = MyPlayer->GetActorRotation();
@@ -38,6 +48,18 @@ void UMyAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		auto Acceleration = CharacterMovement->GetCurrentAcceleration();
 		ShouldMove = GroundSpeed > 0.1 && Acceleration != FVector::Zero();
 
+		IsFalling = CharacterMovement->IsFalling();
 		
+	}
+}
+
+void UMyAnimInstance::PlayAttackMontage()
+{
+	if (IsValid(AttackMontage))
+	{
+		if (!Montage_IsPlaying(AttackMontage))
+		{
+			Montage_IsPlaying(AttackMontage);
+		}
 	}
 }

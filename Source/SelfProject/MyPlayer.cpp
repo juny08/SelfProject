@@ -2,6 +2,7 @@
 
 
 #include "MyPlayer.h"
+#include "MyAnimInstance.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
@@ -95,7 +96,7 @@ void AMyPlayer::Attack()
 
 	if (Result && HitResult.GetActor())
 	{
-		UE_LOG(LogTemp, Log, TEXT("Hit : %s"), *HitResult.GetActor()->GetName())
+		//UE_LOG(LogTemp, Log, TEXT("Hit : %s"), *HitResult.GetActor()->GetName())
 	}
 }
 

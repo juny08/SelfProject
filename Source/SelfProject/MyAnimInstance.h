@@ -21,12 +21,22 @@ private:
 	float Horizontal;
 	UPROPERTY(Category = "Ani", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	float Vertical;
+	UPROPERTY(Category = "Ani", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	bool IsFalling;
+	UPROPERTY(Category = "Ani", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	FVector Velocity;
+public:
+	UMyAnimInstance();
 public:
 	UPROPERTY(VisibleAnywhere)
 	class AMyPlayer* MyPlayer;
 	UPROPERTY(VisibleAnywhere)
 	class UCharacterMovementComponent* CharacterMovement;
+	UPROPERTY(VisibleAnywhere)
+	UAnimMontage* AttackMontage;
 public:
 	virtual void NativeBeginPlay() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+public:
+	void PlayAttackMontage();
 };
